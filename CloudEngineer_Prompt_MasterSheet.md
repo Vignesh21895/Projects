@@ -1,3 +1,4 @@
+
 # 📜 Prompt Engineering Master Sheet for Cloud Engineers  
 *(Reusable Templates & Tricks for Daily AI Use)*  
 
@@ -119,3 +120,8 @@ Example:
 - **Ask for formats** – “Output as a table,” “Give me YAML,” “Provide code + explanation.”
 - **Iterate** – Run the prompt, review, then refine: “Make it more cost-efficient” or “Add private endpoints.”
 - **Use constraints** – “No deprecated services,” “Under ₹50,000/month cost,” “Follow ISO 27001.”
+
+
+Crafted by Vignesh Suresh Kumar — 08/12/2025
+[LinkedIn](https://www.linkedin.com/in/vignesh-suresh-kumar-6640ba197/) | 
+[GitHub] https://github.com/Vignesh21895
