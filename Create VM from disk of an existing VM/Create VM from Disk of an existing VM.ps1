@@ -1,3 +1,27 @@
+################################################################################
+#   
+# Script Purpose:
+#   This script creates a snapshot from an existing VM's disk, 
+#   creates a new disk from that snapshot, and then deploys a new VM "VM-Buildimage01"
+#   from the created disk.
+#
+# Author:
+#   Vignesh Suresh Kumar
+#
+# Instructions:
+#   - Update the following variables before running:
+#       $resourceGroupName    = "customer-avdresources-uks"
+#       $snapshotResourceGroup = "customer-buildimages-uks"
+#
+#
+#   - While running the script, enter the hostname of the VM you want to duplicate.
+#
+# Notes:
+#   Ensure you have appropriate permissions in your machine, AZ CLI installed
+#   Login to AZ CLI using you hosted account and select the appropriate subsription before running the script
+#   
+################################################################################
+
 # Define log file path
 $logFile = "C:\Logs\VMBuild_Log_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
 
@@ -18,8 +42,8 @@ try {
 $vmName = Read-Host "Enter the hostname of the machine for which the disk should be snapshotted"
 
 # Define variables
-$resourceGroupName = "ocgaccountants-avdresources-uks"
-$snapshotResourceGroup = "ocgaccountants-buildimages-uks"
+$resourceGroupName = "company-avdresources-uks"
+$snapshotResourceGroup = "company-buildimages-uks"
 $location = "uksouth"
 
 # Generate snapshot name using date in DDMMYY format
