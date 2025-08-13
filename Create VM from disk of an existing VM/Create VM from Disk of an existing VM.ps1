@@ -14,7 +14,8 @@
 #       $snapshotResourceGroup = "customer-buildimages-uks"
 #
 #
-#   - While running the script, enter the hostname of the VM you want to duplicate.
+#   - While running the script, you will be prompted to enter 
+#     the hostname of the VM you want to duplicate.
 #
 # Notes:
 #   Ensure you have appropriate permissions in your machine, AZ CLI installed
