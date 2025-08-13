@@ -1,4 +1,4 @@
-################################################################################
+##############################################################################
 #   
 # Script Purpose:
 #   This script creates a snapshot from an existing VM's disk, 
@@ -21,7 +21,7 @@
 #   Ensure you have appropriate permissions in your machine, AZ CLI installed
 #   Login to AZ CLI using you hosted account and select the appropriate subsription before running the script
 #   
-################################################################################
+##############################################################################
 
 # Define log file path
 $logFile = "C:\Logs\VMBuild_Log_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
