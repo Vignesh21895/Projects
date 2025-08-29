@@ -4,14 +4,14 @@ Welcome to my collection of cloud engineering automation scripts and projects.
 
 ## Projects
 
-- [VM Disk Clone Automation](./vm-disk-clone-automation)  
+- [VM Disk Clone Automation](./1.Create_VM_from_disk_of_an_existing_VM)  
   Automates cloning of Azure VM disks via PowerShell script.
 
-- [Project 2 Name](./project-2)  
-  Short description.
+- [VM Disk Clone Automation - Terraform](./2.Terraform_Clone_VM)  
+  Automates cloning of Azure VM disks via Terraform (HCL Script).
 
-- [Project 3 Name](./project-3)  
-  Short description.
+- [3. Terraform_Deploy AKS Cluster](./3.Terraform_Deploy_AKS_Cluster)  
+  deploys an AKS cluster with a system-assigned identity.
 
 ...
 
