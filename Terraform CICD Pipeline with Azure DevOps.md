@@ -129,7 +129,7 @@ stages:
 
 ---
 
-## 📖 References
+## References
 
 - [Terraform on Azure](https://learn.microsoft.com/en-us/azure/developer/terraform/)
 - [Azure DevOps Terraform Task](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/terraform-v4)
@@ -137,5 +137,5 @@ stages:
 
 ---
 
-## 👨‍💻 Author
+## Author
 Created by **Vignesh Suresh Kumar** 
