@@ -4,7 +4,7 @@ This repository contains Terraform code to provision Azure resources and a CI/CD
 
 ---
 
-## 🚀 Prerequisites
+## Prerequisites
 
 Before setting up the pipeline, make sure you have:
 
@@ -16,7 +16,7 @@ Before setting up the pipeline, make sure you have:
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 .
@@ -51,7 +51,7 @@ terraform plan
 
 ---
 
-## 📌 Azure DevOps Pipeline Setup
+## Azure DevOps Pipeline Setup
 
 ### 1. Create a New Pipeline
 - Go to **Azure DevOps** → **Pipelines** → **Create Pipeline**
@@ -112,7 +112,7 @@ stages:
 
 ---
 
-## 🔑 Service Connection Setup
+## Service Connection Setup
 
 1. Go to **Project Settings → Service connections** in Azure DevOps  
 2. Create **Azure Resource Manager → Service Principal (automatic)**  
@@ -121,7 +121,7 @@ stages:
 
 ---
 
-## ✅ Usage
+## Usage
 
 - Push changes to the `main` branch → pipeline will run automatically  
 - Check pipeline logs under **Pipelines → Runs**  
@@ -138,4 +138,4 @@ stages:
 ---
 
 ## 👨‍💻 Author
-Created by **Vignesh Suresh Kumar** 🚀  
+Created by **Vignesh Suresh Kumar** 
