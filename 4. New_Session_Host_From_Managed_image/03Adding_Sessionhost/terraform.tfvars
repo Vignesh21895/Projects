@@ -6,6 +6,7 @@ sig_rg            = "franklins-buildimages-uks"
 sig_image_name    = "win10-22h2-avd-m365-g2"
 
 avd_rg            = "franklins-avdsessionhosts-uks"
+vm_size           = "Standard_D4ds_v5"
 
 subnet_name       = "subnet-production"
 vnet_name         = "vnet-franklins-production-uks"
@@ -19,4 +20,4 @@ domain_user       = "irisadmin@franklins.org.uk"
 domain_password   = "YpR.ibHjK*xCbG3J)TEYZc}-"
 
 local_admin_username = "AVDAdmin"
-local_admin_password = "otBAH}@=e%Y=WYR2FW#^eR>+"
+local_admin_password = "AVDAdmin_Password"

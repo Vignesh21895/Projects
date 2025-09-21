@@ -16,6 +16,10 @@ variable "vm_count" {
   type        = number
 }
 
+variable "vm_size" {
+  description = "Size of the session host VMs"
+  type        = string
+}
 # Shared Image Gallery details
 variable "sig_name" {
   description = "Name of the Shared Image Gallery"

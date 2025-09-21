@@ -68,15 +68,24 @@ resource "azurerm_network_interface" "sessionhost_nic" {
 # ---------------------------------------------------------
 # Windows Virtual Machines (Session Hosts)
 # ---------------------------------------------------------
+# Fetch existing VMs in the resource group to determine numbering
+data "azurerm_windows_virtual_machines" "existing_vms" {
+  resource_group_name = azurerm_resource_group.rg.name
+}
+# Get count of existing VMs to continue numbering
+locals {
+  existing_count = length(data.azurerm_windows_virtual_machines.existing_vms.names)
+}
+
 resource "azurerm_windows_virtual_machine" "sessionhost" {
   count               = var.vm_count
-  name                = "host-2"
+  name                = "host-${local.existing_count + count.index + 1}"  # auto-increment
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_D4ds_v5"
 
-  admin_username = "AVDAdmin"
-  admin_password = "otBAH}@=e%Y=WYR2FW#^eR>+"
+  admin_username = var.local_admin_username
+  admin_password = var.local_admin_password
 
   network_interface_ids = [azurerm_network_interface.sessionhost_nic[count.index].id]
 
@@ -111,7 +120,7 @@ resource "azurerm_virtual_machine_extension" "domainjoin" {
     {
       "Name": "cloud.franklins.org.uk",
       "OUPath": "OU=AVD,DC=cloud,DC=franklins,DC=org,DC=uk",
-      "User": "irisadmin@franklins.org.uk",
+      "User": "<DomainJoin_Username>",
       "Restart": "true",
       "Options": "3"
     }
@@ -119,7 +128,7 @@ resource "azurerm_virtual_machine_extension" "domainjoin" {
 
   protected_settings = <<PROTECTED
     {
-      "Password": "YpR.ibHjK*xCbG3J)TEYZc}-"
+      "Password": "<DomainJoin_Password>"
     }
   PROTECTED
 }
