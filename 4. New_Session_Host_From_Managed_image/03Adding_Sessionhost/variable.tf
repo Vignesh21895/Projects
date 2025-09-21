@@ -3,7 +3,10 @@ variable "subscription_id" {
   description = "Azure subscription ID"
   type        = string
 }
-
+variable "location" {
+  description = "Azure location (e.g. uksouth)"
+  type        = string
+}
 # AVD Resource Group
 variable "avd_rg" {
   description = "Name of the Azure resource group for AVD"

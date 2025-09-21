@@ -47,10 +47,3 @@ variable "customer_reference" {
   description = "Customer reference ID for tagging"
   type        = string
 }
-
-# Version to be passed from CI (example: 250920.0315.07)
-variable "image_version" {
-  description = "Compute Gallery image version in X.Y.Z format (e.g., YYMMDD.HHmm.ss)"
-  type        = string
-}
-

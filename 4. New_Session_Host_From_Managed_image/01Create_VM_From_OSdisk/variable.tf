@@ -1,3 +1,8 @@
+variable "subscription_id" {
+  description = "Azure Subscription ID"
+  type        = string
+}
+
 variable "location" {
   description = "Azure region for snapshot, disk, and VM (e.g., UK South)"
   type        = string

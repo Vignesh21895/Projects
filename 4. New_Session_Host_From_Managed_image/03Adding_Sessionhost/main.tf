@@ -19,7 +19,7 @@ provider "azurerm" {
 # ---------------------------------------------------------
 resource "azurerm_resource_group" "rg" {
   name     = var.avd_rg
-  location = "UK South"
+  location = var.location
 }
 
 # ---------------------------------------------------------
@@ -47,9 +47,9 @@ data "azurerm_shared_image_version" "image_version" {
 # Networking
 # ---------------------------------------------------------
 data "azurerm_subnet" "production_subnet" {
-  name                 = "snet-avdresources"
-  virtual_network_name = "vnet-franklins-production-uks"
-  resource_group_name  = "franklins-networking-uks"
+  name                 = var.subnet_name
+  virtual_network_name = var.vnet_name
+  resource_group_name  = var.vnet_rg
 }
 
 resource "azurerm_network_interface" "sessionhost_nic" {
@@ -69,12 +69,13 @@ resource "azurerm_network_interface" "sessionhost_nic" {
 # Windows Virtual Machines (Session Hosts)
 # ---------------------------------------------------------
 # Fetch existing VMs in the resource group to determine numbering
-data "azurerm_windows_virtual_machines" "existing_vms" {
-  resource_group_name = azurerm_resource_group.rg.name
+data "azurerm_virtual_machine" "existing_vm" {
+  name                = "host-0"  # Just a placeholder to fetch VMs
+  resource_group_name = var.avd_rg
 }
 # Get count of existing VMs to continue numbering
 locals {
-  existing_count = length(data.azurerm_windows_virtual_machines.existing_vms.names)
+  existing_count = length(data.azurerm_virtual_machine.existing_vm.name)
 }
 
 resource "azurerm_windows_virtual_machine" "sessionhost" {
@@ -82,7 +83,7 @@ resource "azurerm_windows_virtual_machine" "sessionhost" {
   name                = "host-${local.existing_count + count.index + 1}"  # auto-increment
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_D4ds_v5"
+  size                = var.vm_size
 
   admin_username = var.local_admin_username
   admin_password = var.local_admin_password
@@ -117,22 +118,21 @@ resource "azurerm_virtual_machine_extension" "domainjoin" {
   type_handler_version = "1.3"
 
   settings = <<SETTINGS
-    {
-      "Name": "cloud.franklins.org.uk",
-      "OUPath": "OU=AVD,DC=cloud,DC=franklins,DC=org,DC=uk",
-      "User": "<DomainJoin_Username>",
-      "Restart": "true",
-      "Options": "3"
-    }
-  SETTINGS
+  {
+    "Name": "${var.domain_name}",
+    "User": "${var.domain_user}",
+    "Restart": "true",
+    "Options": "3"
+  }
+SETTINGS
 
-  protected_settings = <<PROTECTED
-    {
-      "Password": "<DomainJoin_Password>"
-    }
-  PROTECTED
+protected_settings = <<PROTECTED
+  {
+    "Password": "${var.domain_password}"
+  }
+PROTECTED
 }
-
+# Can add OUPATH in domain join details part "OUPath": "OU=AVD,DC=cloud,DC=yell,DC=org,DC=uk",
 # ---------------------------------------------------------
 # AVD Host Pool Registration Extension
 # ---------------------------------------------------------
@@ -144,14 +144,14 @@ resource "azurerm_virtual_machine_extension" "avd_registration" {
   type                       = "DSC"
   type_handler_version       = "2.73"
 
-  settings = <<SETTINGS
-    {
-      "modulesUrl": "https://wvdportalstorageblob.blob.core.windows.net/galleryartifacts/Configuration.zip",
-      "configurationFunction": "Configuration.ps1\\AddSessionHost",
-      "properties": {
-        "hostPoolName": "your-hostpool-name",
-        "registrationInfoToken": "paste-your-registration-key-here"
-      }
-    }
-  SETTINGS
+   settings = <<SETTINGS
+{
+  "modulesUrl": "https://wvdportalstorageblob.blob.core.windows.net/galleryartifacts/Configuration.zip",
+  "configurationFunction": "Configuration.ps1\\AddSessionHost",
+  "properties": {
+    "hostPoolName": "${var.hostpool_name}",
+    "registrationInfoToken": "${var.registration_token}"
+  }
+}
+SETTINGS
 }

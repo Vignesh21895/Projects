@@ -13,7 +13,7 @@ terraform {
 
 provider "azurerm" {
   features {}
-  subscription_id = "9f64211c-d3b3-4265-b155-73fd37eaf382"
+  subscription_id = var.subscription_id
 }
 
 provider "azapi" {}
@@ -142,7 +142,7 @@ resource "azapi_resource" "vm_from_disk_trusted" {
   body = {
     properties = {
       hardwareProfile = {
-        vmSize = "Standard_D2s_v3"
+        vmSize = var.vm_size
       }
       networkProfile = {
         networkInterfaces = [

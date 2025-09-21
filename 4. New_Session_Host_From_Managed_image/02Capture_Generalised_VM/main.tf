@@ -40,10 +40,15 @@ data "azurerm_shared_image" "target_image_def" {
 # ------------------------
 
 locals {
-  date     = formatdate("DDMMYY", timestamp())   # e.g., 210925
-  minute   = tonumber(formatdate("mm", timestamp())) # strip leading zero
-  hour     = tonumber(formatdate("HH", timestamp())) # strip leading zero
-  version  = "${local.date}.${local.minute}.${local.hour}"
+  # Day-Month-Year as integer
+  date = tonumber(formatdate("YYMMDD", timestamp()))   # e.g., 250922
+
+  # Strip leading zero from minute and hour
+  minute = tonumber(formatdate("mm", timestamp()))
+  hour   = tonumber(formatdate("HH", timestamp()))
+
+  # Build X.Y.Z version (e.g., 250922.5.17)
+  version = "${local.date}.${local.minute}.${local.hour}"
 }
 resource "azurerm_shared_image_version" "new_version" {
   # Version must be explicit; pass from CI as a formatted timestamp (e.g., 250920.0315.07)

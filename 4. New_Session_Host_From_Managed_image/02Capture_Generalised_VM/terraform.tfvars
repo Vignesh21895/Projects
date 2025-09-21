@@ -1,20 +1,16 @@
-subscription_id      = "9f64211c-d3b3-4265-b155-73fd37eaf382"
+subscription_id = "e60d8df5-6d8c-4903-bc33-e60bc130d645"
 
 # Generalized VM details
 vm_name              = "VM-Buildimage01"
-vm_rg_name           = "franklins-buildimages-uks"
+vm_rg_name           = "yell-buildimages-uks"
 location             = "uksouth"
 os_type              = "Windows"
 
 # Compute Gallery details
-gallery_name         = "acg_franklins_uks"            # <-- replace with your actual gallery name
-gallery_rg_name      = "franklins-buildimages-uks"          # <-- replace with your gallery RG
-image_definition_name = "win10-22h2-avd-m365-g2"       # <-- replace with actual image definition
+gallery_name         = "acg_yell_uks"            # <-- replace with your actual gallery name
+gallery_rg_name      = "yell-buildimages-uks"          # <-- replace with your gallery RG
+image_definition_name = "win11-22h2-avd-m365"       # <-- replace with actual image definition
 
 # Tagging
-customer_name        = "Franklins Accountancy Audit & Tax Limited"
-customer_reference   = "I8687-14"
-
-# Version naming (CI should inject a unique timestamp string like YYMMDD.HHmm.ss)
-image_version       = "250920.0330.45"
-
+customer_name        = "Yell Limited"
+customer_reference   = "OINEA-A2"
